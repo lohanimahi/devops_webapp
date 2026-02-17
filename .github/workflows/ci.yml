@@ -12,8 +12,14 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
 
-    - name: Display Build Message
+    - name: Build Step
       run: echo "Build Successful 🚀"
 
     - name: List Files
       run: ls
+
+    - name: Send Slack Notification
+      run: |
+        curl -X POST -H 'Content-type: application/json' \
+        --data '{"text":"✅ CI Pipeline Successful for devops_webapp"}' \
+        ${{ secrets.SLACK_WEBHOOK }}
